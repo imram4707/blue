@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <link rel="icon" type="image/x-icon" href="dice favicon.png">
+    </link>
+    <link rel="stylesheet" href="style.css">
+    <title>Roll the Dice</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>Dice it</h1>
+        </div>
+        <div class="game">
+            <div class="player1">
+                <h2>Player 1</h2>
+                <img src="dice1.png" alt="rolled" id="player1dice">
+            </div>
+            <div class="player2">
+                <h2>Player 2</h2>
+                <img src="dice1.png" alt="rolled" id="player2dice">
+            </div>
+            <div class="tools">
+                <button onclick="roll()">Roll</button>
+            <button onclick="reset()">Reset</button>
+
+            </div>
+            
+        </div>
+        <div class="results">
+            <h2 id="result">
+                New game
+            </h2>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+
+</html>
+----------------------------------------------------------------------
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+body{
+    overflow: auto;
+    height: 140vh; 
+    background: linear-gradient(rgb(226, 169, 47),rgb(201, 104, 117));
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.container{
+    margin:0;
+}
+.game, .results{
+    margin:40px ;
+}
+.game
+{
+    display: flex;
+     justify-content: space-around;
+     align-items: center;
+     flex-wrap: wrap;
+}
+.results
+{
+    display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.heading
+{
+    display: flex;
+     justify-content: center;
+     align-items: center;
+}
+.player1{
+    display: flex;
+    flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.player2{
+    display: flex;
+    flex-direction: column;
+     justify-content: center;
+     align-items: center;
+}
+.tools{
+    height:28vh;
+    margin:2px;
+    display: flex;
+    flex-direction: column;
+    gap:2;
+    justify-content: space-evenly;
+    align-items: center;
+    
+}
+
+ button
+ {
+    width: 200px;
+    padding: 10px 20px;
+    text-align: center;
+    background-color: rgb(235, 114, 57);
+    color: black;
+    font-weight: bold;
+    font-size: 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+  
+
+}
+button:nth-of-type(2)
+{
+    background-color: brown;
+}
+
+button:hover{
+   background-color: black;
+   color: rgb(235, 114, 57);
+   transform: translateY(-15%);
+   box-shadow: 8px 8px 13px 0 rgb(235, 114, 57);
+}
+
+img{
+    width:200px;
+    height:200px;
+}
+h1{
+    font-family: 'Permanent Marker', cursive;
+    font-size:5rem;
+    
+}
+h2{
+font-family: 'Prompt', sans-serif;
+font-size: 2rem;
+}
+#result{
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 1500;
+}
+------------------------------------------------------------------------------
+let results= document.getElementById('result');
+let player1Dice= document.getElementById('player1dice');
+let player2Dice= document.getElementById('player2dice');
+let playerOneDice;
+let  playerTwoDice;
+
+function roll()
+{
+
+    let diceOne=Math.floor((Math.random()*6)+1);
+    let diceTwo=Math.floor((Math.random()*6)+1);
+
+     playerOneDice="dice"+diceOne+".png";
+     playerTwoDice="dice"+diceTwo+".png";
+
+    player1Dice.setAttribute('src',playerOneDice);
+    player2Dice.setAttribute('src',playerTwoDice)
+
+    if(diceOne===diceTwo)
+    {
+      results.textContent="It's a Draw";
+    }
+    else if(diceOne>diceTwo)
+    {
+        results.textContent="Player 1 Won, Yay!!!";
+    }
+    else{
+        results.textContent="Player 2 Won, Yay!!!";
+    }
+}
+
+function reset(){
+    player1Dice.setAttribute('src',"dice1.png");
+    player2Dice.setAttribute('src',"dice1.png");
+    results.textContent="New game";
+}
+
